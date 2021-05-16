@@ -1,0 +1,31 @@
+[user]
+	name = huaqianlee
+	email = huaqian@gmail.com
+
+[color]
+	ui = auto
+
+# store pwd
+[credential]
+        helper = store
+
+# template of commit message
+#[commit]
+#      template = ~/.git_complate
+
+[alias]
+	st = status
+	lo = log --oneline
+	lg = log --oneline --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(    %cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	cp = cherry-pick
+	co = checkout
+	cm = commit
+	br = branch
+	df = diff
+	sneak = commit -a --amend --no-edit
+	undo = reset --soft HEAD^
+	conl = config --local --list
+
+[core]
+	editor = vim	
+
