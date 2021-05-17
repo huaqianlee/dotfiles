@@ -451,7 +451,12 @@ let g:pymode_syntax_string_templates = 0
 " Code check
 let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
 
-
+" q to exit Conque gdb window
+let g:ConqueTerm_StartMessages = 0
+let g:ConqueTerm_Color = 0
+let g:ConqueTerm_CloseOnEnd = 1
+let g:ConqueTerm_Interrupt = '<C-g><C-c>'
+let g:ConqueTerm_ReadUnfocused = 1
 
 "YCM
 " Disable text prompt when the cursor has a long stay
