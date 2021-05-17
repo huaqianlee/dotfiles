@@ -8,6 +8,12 @@ ZSH_CUSTOM=$LEE_HOME/.oh-my-zsh
 #####################################################################
 # Install packdges and setting
 #####################################################################
+# clipboard
+# apt -y install xsel
+
+# Install python package for terminator themes
+# pip install requests
+
 #cp -rfT .* ~/
 # bash
 #stow bash -t $STOW_DIR
@@ -20,9 +26,10 @@ stow -D oh-my-zsh -t $STOW_DIR
 
 # zsh
 echo "Installing zsh ..."
-# apt -y install zsh
+apt -y install zsh
 stow zsh -t $STOW_DIR
 eval `chsh -s $(which zsh)`
+
 
 # vim
 echo "Installing vim ..."
@@ -39,25 +46,30 @@ stow tmux -t $STOW_DIR
 # Terminator
 # apt -y install terminator
 # stow terminator -t $STOW_DIR
-# git clone git://github.com/sigurdga/gnome-terminal-colors-solarized.git ~/.solarized
-# cd ~/.solarized ; ./install.sh
 
 # Oh My Zsh
 # sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 echo "Installing oh My Zsh ..."
-#eval "$LEE_HOME/.oh-my-zsh/tools/install.sh"
+# eval "$LEE_HOME/.oh-my-zsh/tools/install.sh"
 rm -rf $LEE_HOME/.oh-my-zsh
-eval "zsh/.oh-my-zsh/tools/install.sh"
-#sh -c "$LEE_HOME/.oh-my-zsh/tools/install.sh"
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
-
-# clipboard
-# apt -y install xsel
-
+# execute install.sh in a new bash
+bash --rcfile <(echo '. ~/.bashrc; . zsh/.oh-my-zsh/tools/install.sh')
+# eval "zsh/.oh-my-zsh/tools/install.sh"
+# sh -c "$LEE_HOME/.oh-my-zsh/tools/install.sh"
 
 # Install Powerline fonts
-# apt -y install fonts-powerline
+apt -y install fonts-powerline
 
-# Install python package for terminator themes
-# pip install requests
+# solarized
+apt -y install dconf-cli
+# git clone git://github.com/sigurdga/gnome-terminal-colors-solarized.git ~/.solarized
+# cd ~/.solarized ; ./install.sh
+# eval "zsh/.solarized/install.sh; zsh/.solarized/set_dark.sh"
+# execute install.sh in a new bash
+bash --rcfile <(echo '. ~/.bashrc;. zsh/.solarized/install.sh;. zsh/.solarized/set_dark.sh')
+
+# autosuggestions
+# git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+mv $LEE_HOME/zsh-autosuggestions $ZSH_CUSTOM/plugins/
+
+
