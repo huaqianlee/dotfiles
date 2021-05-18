@@ -52,14 +52,15 @@ stow tmux -t $STOW_DIR
 apt -y install fonts-powerline
 
 # Oh My Zsh
-# sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 echo "Installing oh My Zsh ..."
+# rm -rf $LEE_HOME/.oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 # eval "$LEE_HOME/.oh-my-zsh/tools/install.sh"
-rm -rf $LEE_HOME/.oh-my-zsh
 # execute install.sh in a new bash
 # bash --rcfile <(echo '. ~/.bashrc; . zsh/.oh-my-zsh/tools/install.sh; mv $LEE_HOME/zsh-autosuggestions $ZSH_CUSTOM/plugins/')  &
 # bash `. zsh/.oh-my-zsh/tools/install.sh; mv $LEE_HOME/zsh-autosuggestions $ZSH_CUSTOM/plugins/` &
-eval `. zsh/.oh-my-zsh/tools/install.sh && mv $LEE_HOME/zsh-autosuggestions $ZSH_CUSTOM/plugins/` 
+eval `. zsh/.oh-my-zsh/tools/install.sh --keep-zshrc --unattended` 
+# cp zsh/zsh-autosuggestions $ZSH_CUSTOM/plugins/
 
 # solarized
 # apt -y install dconf-cli
