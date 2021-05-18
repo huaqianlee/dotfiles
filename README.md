@@ -10,7 +10,7 @@ git clone --recursive https://github.com/huaqianlee/dotfiles.git
 
 ## Apply all of configurations and stuffs
 ```bash
-sudo bash install.sh
+./install.sh
 ```
 ## Now?
 Now? Enjoy my linux enviroment.
