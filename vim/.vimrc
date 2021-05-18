@@ -25,7 +25,7 @@ Plug 'dense-analysis/ale'
 Plug 'https://github.com/preservim/nerdcommenter'
 Plug 'https://github.com/sjl/gundo.vim'
 Plug 'https://github.com/python-mode/python-mode'
-Plug 'https://github.com/godlygeek/tabular'
+" Plug 'https://github.com/godlygeek/tabular'
 Plug 'https://github.com/easymotion/vim-easymotion'
 Plug 'https://github.com/vim-scripts/SrcExpl'
 " On-demand loading
@@ -37,7 +37,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-eunuch'
-Plug 'mbbill/echofunc '
+Plug 'mbbill/echofunc'
 "FZF
 Plug 'junegunn/fzf', {'do': {-> fzf#install()}}
 Plug 'junegunn/fzf.vim'
@@ -54,10 +54,10 @@ Plug 'vim-airline/vim-airline'
 Plug 'preservim/nerdcommenter'
 
 " Markdown
+Plug 'godlygeek/tabular'
 " This plugin will fold the content
 Plug 'plasticboy/vim-markdown'
-Plug 'ftplugin/markdown.vim'
-Plug 'godlygeek/tabular'
+" Plug 'ftplugin/markdown.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 " Python
@@ -76,7 +76,7 @@ Plug 'mattn/calendar-vim'
 
 " For csv files
 Plug 'mechatroner/rainbow_csv'
-Plug 'mgodlygeek/tabular'
+" Plug 'mgodlygeek/tabular'
 
 call plug#end()
 
@@ -235,7 +235,7 @@ nnoremap <f5>  :if g:asyncrun_status != 'running'<bar>
 noremap <silent> <tab>  :pyxf /usr/share/clang/clang-format-6.0/clang-format.py<cr>
 
 " enable man
-source $vimruntime/ftplugin/man.vim
+source $VIMRUNTIME/ftplugin/man.vim
 
 set keywordprg=:man
 
