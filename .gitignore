@@ -1,3 +1,4 @@
 *.swp
+*.swo
 plugged
 vim/.vim/undodir

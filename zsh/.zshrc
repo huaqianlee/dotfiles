@@ -76,7 +76,6 @@ plugins=(
   #vi-mode
   colored-man-pages
   history-substring-search
-  z zsh-autosuggestions
   #fzf
 )
 

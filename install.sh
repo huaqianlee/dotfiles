@@ -1,9 +1,10 @@
 #!/bin/sh
 # Powered by AndyLee
 
-LEE_HOME=/home/lee
-STOW_DIR=$LEE_HOME
-ZSH_CUSTOM=$LEE_HOME/.oh-my-zsh
+USER_DIR=/home/lee
+USER_PASSWD="a\n"
+STOW_DIR=$USER_DIR
+ZSH_CUSTOM=$USER_DIR/.oh-my-zsh
 
 #####################################################################
 # Install packdges and setting
@@ -22,14 +23,14 @@ stow -D zsh -t $STOW_DIR
 stow -D vim -t $STOW_DIR
 stow -D git -t $STOW_DIR
 stow -D tmux -t $STOW_DIR
-rm -rf $LEE_HOME/.oh-my-zsh
-# rm -rf $LEE_HOME/.dir_colors
-# rm -rf $LEE_HOME/.solarized
+rm -rf $USER_DIR/.oh-my-zsh
+# rm -rf $USER_DIR/.dir_colors
+# rm -rf $USER_DIR/.solarized
 
 # For root privileges.
 if [ "$(whoami)" != "root" ] # [ "$(UID)" != 0 ]
 then
-printf "a\n" | sudo -s <<EOF
+printf "$USER_PASSWD" | sudo -s <<EOF
 	apt -y install zsh
 	apt install tmux
 	apt -y install fonts-powerline
@@ -69,7 +70,7 @@ cp -rf submodules/zsh-autosuggestions $ZSH_CUSTOM/plugins/
 # solarized
 # git clone git://github.com/sigurdga/gnome-terminal-colors-solarized.git ~/.solarized
 # echo "Installing solarized ..."
-# eval `printf "1\n1\nYES\n\n" | $LEE_HOME/.solarized/install.sh`
+# eval `printf "1\n1\nYES\n\n" | $USER_DIR/.solarized/install.sh`
 
-eval `printf "a\n" | chsh -s $(which zsh)`
+eval `printf "$USER_PASSWD" | chsh -s $(which zsh)`
 exec zsh -l
