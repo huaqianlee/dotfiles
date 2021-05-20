@@ -116,24 +116,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# add f5 route
-function addf5route()
-{
-    SonyGateWay=`ifconfig tun0 | grep "inet " | awk '{ print $2}'`
-    echo "Sony GateWay is $MyIP"
-    if [ -n "$SonyGateWay" ]; then
-        echo "sudo route add -net 10.128.0.0/9 gw $SonyGateWay"
-        sudo route add -net 10.128.0.0/9 gw $SonyGateWay
-        echo "sudo route del -net 0.0.0.0/1 gw $SonyGateWay"
-        sudo route del -net 0.0.0.0/1 gw $SonyGateWay
-        echo "sudo route del -net 128.0.0.0/1 gw $SonyGateWay"
-        sudo route del -net 128.0.0.0/1 gw $SonyGateWay
-    else
-        echo "tun0 inet addr is null, exit "
-    fi
-}
 
 VISUAL=vim; export VISUAL EDITOR=vim; export EDITOR
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh"  ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion"  ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Export
 export FZF_DEFAULT_COMMAND='rg --files --sortr modified'

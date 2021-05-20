@@ -178,3 +178,6 @@ alias pbpaste='xsel --clipboard --output'
 # }
 # 
 VISUAL=vim; export VISUAL EDITOR=vim; export EDITOR
+
+# Export
+export FZF_DEFAULT_COMMAND='rg --files --sortr modified'

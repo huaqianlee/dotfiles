@@ -144,11 +144,12 @@ set hls
 set cursorline
 "set ruler
 "set magic
-"set tabstop=4 " set tab's width to 4
-"set expandtab " replace tab with space
-"set shiftwidth=4 " set indentation to 4
+set tabstop=4 " set tab's width to 4
+set expandtab " replace tab with space
+set shiftwidth=4 " set indentation to 4
 au filetype c,cpp,objc  setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=4 cinoptions=:0,g0,(0,w1
 au filetype json        setlocal expandtab shiftwidth=2 softtabstop=2
+" vim script
 au filetype vim         setlocal expandtab shiftwidth=2 softtabstop=2
 "set noexpandtab  " do not replace tab with space
 " highlight current line
