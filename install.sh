@@ -30,9 +30,11 @@ rm -rf $USER_DIR/.oh-my-zsh
 # For root privileges.
 if [ "$(whoami)" != "root" ] # [ "$(UID)" != 0 ]
 then
-printf "$USER_PASSWD" | sudo -s <<EOF
+printf  "%s" "$USER_PASSWD" | sudo -s <<EOF
 	apt -y install zsh
 	apt install tmux
+	apt install fzf
+	apt install vim-youcompleteme
 	apt -y install fonts-powerline
 EOF
 fi
@@ -43,6 +45,7 @@ stow zsh -t $STOW_DIR
 
 echo "Installing vim ..."
 stow vim -t $STOW_DIR
+vam install youcompleteme
 
 # git
 echo "Installing git ..."
@@ -72,5 +75,5 @@ cp -rf submodules/zsh-autosuggestions $ZSH_CUSTOM/plugins/
 # echo "Installing solarized ..."
 # eval `printf "1\n1\nYES\n\n" | $USER_DIR/.solarized/install.sh`
 
-eval `printf "$USER_PASSWD" | chsh -s $(which zsh)`
+eval `printf  "%s" "$USER_PASSWD" | chsh -s $(which zsh)`
 exec zsh -l

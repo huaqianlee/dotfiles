@@ -172,32 +172,33 @@ set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
 " key remapping
 " nnorempa - normal mode, inoremap - insert mode
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <c-tab>   <c-w>w
-inoremap <c-tab>   <c-o><c-w>w
-nnoremap <c-s-tab> <c-w>w
-inoremap <c-s-tab> <c-o><c-w>w  
+nnoremap <C-tab>   <C-w>w
+inoremap <C-tab>   <C-o><C-w>w
+nnoremap <C-s-tab> <C-w>w
+inoremap <C-s-tab> <C-o><C-w>w  
 " :help i_ctrl-o for the details
 
 " stop highlight
-nnoremap <silent> <f2>      :nohlsearch<cr>
-inoremap <silent> <f2> <c-o>:nohlsearch<cr>
+nnoremap <silent> <F2>      :nohlsearch<cr>
+inoremap <silent> <F2> <C-o>:nohlsearch<cr>
 
 " ycm
-nnoremap <leader>fi :ycmcompleter fixit<cr>
-nnoremap <leader>gt :ycmcompleter goto<cr>
-nnoremap <leader>gd :ycmcompleter gotodefinition<cr>
-nnoremap <leader>gh :ycmcompleter gotodeclaration<cr>
-nnoremap <leader>gr :ycmcompleter gotoreferences<cr>
+nnoremap <Leader>fi :YcmCompleter FixIt<CR>
+nnoremap <Leader>gt :YcmCompleter GoTo<CR> 
+nnoremap <Leader>gd :YcmCompleter GoToDefinition<CR>
+nnoremap <Leader>gh :YcmCompleter GoToDeclaration<CR>
+nnoremap <Leader>gr :YcmCompleter GoToReferences<CR>
 
-" for quickfix, tab, file jumping ... 
-nmap <f11>   :cn<cr>
-nmap <f12>   :cp<cr>
-nmap <m-f11> :copen<cr>
-nmap <m-f12> :cclose<cr>
-nmap <c-f11> :tn<cr>
-nmap <c-f12> :tp<cr>
-nmap <s-f11> :n<cr>
-nmap <s-f12> :prev<cr>
+
+" :help <M- , ... for quickfix, tab, file jumping ... 
+nmap <F11>   :cn<cr>
+nmap <F12>   :cp<cr>
+nmap <M-F11> :copen<cr>
+nmap <M-F12> :cclose<cr>
+nmap <C-F11> :tn<cr>
+nmap <C-F12> :tp<cr>
+nmap <S-F11> :n<cr>
+nmap <S-F12> :prev<cr>
 
 
 " replace the word under the cursor
@@ -207,22 +208,22 @@ nnoremap <leader>v viw"0p
 vnoremap <leader>v    "0p
 
 " tabar
-" nnoremap <f9>      :tagbartoggle<cr>
-" inoremap <f9> <c-o>:tagbartoggle<cr>
+" nnoremap <F9>      :tagbartoggle<cr>
+" inoremap <F9> <C-o>:tagbartoggle<cr>
 
 " f9 + tab to show the recent used files in terminal
 if !has('gui_running') 
     if has('wildmenu')
         set wildmenu
         set cpoptions-=<
-        set wildcharm=<c-z>
-        nnoremap <f9>   :emenu <c-z>
-        inoremap <f9> <c-o>:emenu <c-z>
+        set wildcharm=<C-z>
+        nnoremap <F9>   :emenu <C-z>
+        inoremap <F9> <C-o>:emenu <C-z>
     endif
 endif
 
 " asyncrun make
-nnoremap <f5>  :if g:asyncrun_status != 'running'<bar>
+nnoremap <F5>  :if g:asyncrun_status != 'running'<bar>
                  \if &modifiable<bar>
                    \update<bar>
                  \endif<bar>
@@ -459,7 +460,7 @@ let g:ConqueTerm_CloseOnEnd = 1
 let g:ConqueTerm_Interrupt = '<C-g><C-c>'
 let g:ConqueTerm_ReadUnfocused = 1
 
-"YCM
+" YCM
 " Disable text prompt when the cursor has a long stay
 let g:ycm_auto_hover = ''
 " Auto complete in comments
@@ -475,8 +476,21 @@ let g:ycm_filetype_whitelist = {
 let g:ycm_goto_buffer_command = 'split-or-existing-window'
 let g:ycm_key_invoke_completion = '<C-Z>'
 
+" let g:ycm_global_ycm_extra_conf = '/usr/lib/ycmd/ycm_extra_conf.py'
+
 " Close quickfix if it is the last window
 aug QFClose
   au!
   au WinEnter *  if winnr('$') == 1 && &buftype == "quickfix"|q|endif
 aug END
+
+
+" syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
