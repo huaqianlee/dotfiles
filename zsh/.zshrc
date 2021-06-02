@@ -151,6 +151,10 @@ alias update="sudo apt update"
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
 
+# Configure Ctrl+U to backward-kill-line not kill-whole-line
+bindkey \^U backward-kill-line
+bindkey \^G kill-whole-line
+
 # eval `dircolors ~/.dir_colors/dircolors`
 
 # My function
