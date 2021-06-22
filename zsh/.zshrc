@@ -132,9 +132,9 @@ setopt hist_ignore_all_dups hist_save_nodups
 # My aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-# alias ll='ls -alF' # remain the default usage of ll
+alias ll='ls -alFh'
 alias la='ls -A'
-alias lal='ls -alFh'
+# alias lal='ls -alFh'
 alias l='ls -CFh'
 alias lg='ll -a | grep '
 alias hg='history | grep '
@@ -150,6 +150,7 @@ alias update="sudo apt update"
 # cat file | pbcopy , or pbcopy < file
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
+alias myip="ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
 
 # Configure Ctrl+U to backward-kill-line not kill-whole-line
 bindkey \^U backward-kill-line
