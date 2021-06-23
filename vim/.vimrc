@@ -25,7 +25,6 @@ Plug 'dense-analysis/ale'
 Plug 'https://github.com/preservim/nerdcommenter'
 Plug 'https://github.com/sjl/gundo.vim'
 Plug 'https://github.com/python-mode/python-mode'
-" Plug 'https://github.com/godlygeek/tabular'
 Plug 'https://github.com/easymotion/vim-easymotion'
 Plug 'https://github.com/vim-scripts/SrcExpl'
 " On-demand loading
@@ -54,6 +53,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'preservim/nerdcommenter'
 
 " Markdown
+" Plug 'https://github.com/godlygeek/tabular'
 Plug 'godlygeek/tabular'
 " This plugin will fold the content
 Plug 'plasticboy/vim-markdown'
@@ -112,22 +112,22 @@ endif
 
 " Support mouse
 if has('mouse')
-	if has('gui_running')
+	if has('gui_running') || (&term =~ 'xterm' && !has('mac'))
 		set mouse=a
 	else
 		set mouse=nvi
 	endif
 endif
 
-" default font size
+" Default font size
 if has('gui_running')
-	"set guifont=monaco:h8
-	"set guifont=monospace:h8
-	set guifont=dejavu\ sans\ mono\ 10
-	set guifontwide=noto\ sans\ mono\ cjk\ sc\ 11
-	" set guifont=monospace \11
+	"set guifont=Monaco:h8
+	"set guifont=Monospace:h8
+	set guifont=DejaVu\ Sans\ Mono\ 11
+	set guifontwide=Noto\ Sans\ Mono\ CJK\ SC\ 11
+	"set guifont=Monospace \11
 	
-	" do not delay loading menu
+	" Do not delay loading Menu
 	let do_syntax_sel_menu = 1
 	let do_no_lazyload_menus = 1
 endif
@@ -136,7 +136,7 @@ endif
 set scrolloff=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" my preference
+" My preference
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set number
 "set highlightsearch
@@ -147,78 +147,77 @@ set cursorline
 set tabstop=4 " set tab's width to 4
 set expandtab " replace tab with space
 set shiftwidth=4 " set indentation to 4
-au filetype c,cpp,objc  setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=4 cinoptions=:0,g0,(0,w1
-au filetype json        setlocal expandtab shiftwidth=2 softtabstop=2
+au FileType c,cpp,objc  setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=4 cinoptions=:0,g0,(0,w1
+au FileType json        setlocal expandtab shiftwidth=2 softtabstop=2
 " vim script
-au filetype vim         setlocal expandtab shiftwidth=2 softtabstop=2
-"set noexpandtab  " do not replace tab with space
+au FileType vim         setlocal expandtab shiftwidth=2 softtabstop=2
+"set noexpandtab  " Do not replace tab with space
 " highlight current line
-"au winleave * set nocursorline nocursorcolumn
-"au winenter * set cursorline cursorcolumn
+"au WinLeave * set nocursorline nocursorcolumn
+"au WinEnter * set cursorline cursorcolumn
 "set cursorline cursorcolumn
 "
 " 0 means no limit
-au filetype changelog  setlocal textwidth=76
+au FileType changelog  setlocal textwidth=76
 
 setlocal spell spelllang=en_us
 set spelllang+=cjk
-" support mouse right click menu.
+" Support mouse right click menu.
 set mousemodel=popup_setpos
 
 
-" pust cscope cmd results in quickfix
+" Pust Cscope cmd results in quickfix
 set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" key remapping
+" Key remapping
 " nnorempa - normal mode, inoremap - insert mode
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <C-tab>   <C-w>w
-inoremap <C-tab>   <C-o><C-w>w
-nnoremap <C-s-tab> <C-w>w
-inoremap <C-s-tab> <C-o><C-w>w  
-" :help i_ctrl-o for the details
+nnoremap <C-Tab>   <C-W>w
+inoremap <C-Tab>   <C-O><C-W>w
+nnoremap <C-S-Tab> <C-W>W
+inoremap <C-S-Tab> <C-O><C-W>W  
+" :help i_CTRL-O for the details
 
-" stop highlight
-nnoremap <silent> <F2>      :nohlsearch<cr>
-inoremap <silent> <F2> <C-o>:nohlsearch<cr>
+" Stop highlight
+nnoremap <silent> <F2>      :nohlsearch<CR>
+inoremap <silent> <F2> <C-O>:nohlsearch<CR>
 
-" ycm
+" YCM
 nnoremap <Leader>fi :YcmCompleter FixIt<CR>
-nnoremap <Leader>gt :YcmCompleter GoTo<CR> 
+nnoremap <Leader>gt :YcmCompleter GoTo<CR>
 nnoremap <Leader>gd :YcmCompleter GoToDefinition<CR>
 nnoremap <Leader>gh :YcmCompleter GoToDeclaration<CR>
 nnoremap <Leader>gr :YcmCompleter GoToReferences<CR>
 
-
 " :help <M- , ... for quickfix, tab, file jumping ... 
-nmap <F11>   :cn<cr>
-nmap <F12>   :cp<cr>
-nmap <M-F11> :copen<cr>
-nmap <M-F12> :cclose<cr>
-nmap <C-F11> :tn<cr>
-nmap <C-F12> :tp<cr>
-nmap <S-F11> :n<cr>
-nmap <S-F12> :prev<cr>
+nmap <F11>   :cn<CR>
+nmap <F12>   :cp<CR>
+nmap <M-F11> :copen<CR>
+nmap <M-F12> :cclose<CR>
+nmap <C-F11> :tn<CR>
+nmap <C-F12> :tp<CR>
+nmap <S-F11> :n<CR>
+nmap <S-F12> :prev<CR>
 
 
-" replace the word under the cursor
-" <leader>v means \v , :help leader
+" Replace the word under the cursor
+" <Leader>V means \v , :help Leader
 " nomarl mode and visual mode.
-nnoremap <leader>v viw"0p
-vnoremap <leader>v    "0p
+nnoremap <Leader>v viw"0p
+vnoremap <Leader>v    "0p
 
-" tabar
-" nnoremap <F9>      :tagbartoggle<cr>
-" inoremap <F9> <C-o>:tagbartoggle<cr>
+" Tabar
+" nnoremap <F9>      :TagbarToggle<CR>
+" inoremap <F9> <C-O>:TagbarToggle<CR>
 
-" f9 + tab to show the recent used files in terminal
+" F9 + Tab to show the recent used files in terminal
 if !has('gui_running') 
     if has('wildmenu')
         set wildmenu
         set cpoptions-=<
-        set wildcharm=<C-z>
-        nnoremap <F9>   :emenu <C-z>
-        inoremap <F9> <C-o>:emenu <C-z>
+        set wildcharm=<C-Z>
+        nnoremap <F9>   :emenu <C-Z>
+        inoremap <F9> <C-O>:emenu <C-Z>
     endif
 endif
 
@@ -227,34 +226,34 @@ nnoremap <F5>  :if g:asyncrun_status != 'running'<bar>
                  \if &modifiable<bar>
                    \update<bar>
                  \endif<bar>
-                 \exec 'make'<bar>
+                 \exec 'Make'<bar>
                \else<bar>
-                 \asyncstop<bar>
-               \endif<cr>
+                 \AsyncStop<bar>
+               \endif<CR>
 
-" for clang-format, ubuntu 18.04
-" need to copy .vim/.clang-format to the souce code root dir.
-noremap <silent> <tab>  :pyxf /usr/share/clang/clang-format-6.0/clang-format.py<cr>
+" For clang-format, Ubuntu 18.04
+" Need to copy .vim/.clang-format to the souce code root dir.
+noremap <silent> <Tab>  :pyxf /usr/share/clang/clang-format-6.0/clang-format.py<CR>
 
-" enable man
+" Enable man
 source $VIMRUNTIME/ftplugin/man.vim
 
-set keywordprg=:man
+set keywordprg=:Man
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " colorscheme molokai
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme  molokai  
-set t_co=256
+set t_Co=256
 set background=dark
 let g:molokai_original = 1
 "let g:rehash256 = 1
 
-" open quickfix when asyncrun
+" Open quickfix when asyncrun
 let g:asyncrun_open = 10
 
-" set $colorterm as true color or 24bit
+" Set $COLORTERM as true color or 24bit
 " if has('termguicolors') &&
 " 	      \($COLORTERM == 'truecolor' || $COLORTERM == '24bit')
 " 	  set termguicolors
@@ -285,7 +284,7 @@ let g:airline#extensions#tabline#show_tab_nr = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Supports chinese
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set fileencodings=utf-8,ucs-bom,gb18030,latin1,gbk,gb2312,cp936
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936,latin1
 set termencoding=utf-8
 set encoding=utf-8
 
@@ -460,7 +459,8 @@ let g:ConqueTerm_CloseOnEnd = 1
 let g:ConqueTerm_Interrupt = '<C-g><C-c>'
 let g:ConqueTerm_ReadUnfocused = 1
 
-" YCM
+
+"YCM
 " Disable text prompt when the cursor has a long stay
 let g:ycm_auto_hover = ''
 " Auto complete in comments
