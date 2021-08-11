@@ -92,8 +92,6 @@ if !has('gui_running')
 	  let g:NERDMenuMode = 0
 endif
 
-" Import Syntax and search highlight, command history, last space ...
-source $VIMRUNTIME/vimrc_example.vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Common setting
@@ -288,7 +286,8 @@ set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936,latin1
 set termencoding=utf-8
 set encoding=utf-8
 
-
+" Import Syntax and search highlight, command history, last space ...
+source $VIMRUNTIME/vimrc_example.vim
 
 " Include system tags(system head file) and tags of parent directory
 " set tags=./tags,../tags,../../tags,tags,/usr/local/etc/systags
