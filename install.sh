@@ -32,12 +32,17 @@ if [ "$(whoami)" != "root" ] # [ "$(UID)" != 0 ]
 then
 printf  "%s" "$USER_PASSWD" | sudo -s <<EOF
 	apt -y install zsh
-	apt install tmux
-	apt install fzf
-	apt install vim-youcompleteme
+	apt -y install tmux
+	apt -y install fzf
+	apt -y install vim-youcompleteme
 	apt -y install fonts-powerline
+    apt -y install ripgrep
+    apt -y install bat
+    apt -y install exuberant-ctags 
+    apt -y install cscope
 EOF
 fi
+# snap install universal-ctags
 
 # zsh
 echo "Installing zsh ..."
