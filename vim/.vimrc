@@ -130,6 +130,23 @@ if has('gui_running')
 	let do_no_lazyload_menus = 1
 endif
 
+" Automaticly control paste mode
+if !has('patch-8.0.210')
+  " Enable brackets mode when entering insert mode
+  let &t_SI .= "\<Esc>[?2004h"
+  " Disable brackets mode when quit insert mode
+  let &t_EI .= "\<Esc>[?2004l"
+  " when <Esc>[200~ call XTermPasteBegin
+  inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+
+  function! XTermPasteBegin()
+    " set  <Esc>[201~ to disable paste mode
+    set pastetoggle=<Esc>[201~
+    " enable paste mode
+    set paste
+    return ""
+  endfunction
+endif
 
 set scrolloff=1
 
