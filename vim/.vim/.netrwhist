@@ -1,3 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =1
-let g:netrw_dirhist_1='/home/lee'
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/home/lee/code_space/poseidonhw/rb5-dev/apps_proc/src/kernel/msm-4.19/techpack/camera/drivers/cam_sensor_module/cam_sensor'
+let g:netrw_dirhist_2='/home/lee/work_space/iot/code'
+let g:netrw_dirhist_3='/home/lee/code_space/poseidonhw/rb5-dev/apps_proc/src/kernel/msm-4.19/techpack/camera/drivers/cam_sensor_module/cam_sensor'
