@@ -10,11 +10,13 @@ Plug 'preservim/NERDTree'
 Plug 'https://github.com/kien/ctrlp.vim'
 Plug 'https://github.com/vim-scripts/taglist.vim'
 Plug 'https://github.com/majutsushi/tagbar'
-" Need to 'sudo apt-get install ctags'
+" Need to 'sudo apt-get install exuberant-ctags'
+" sudo snap install universal-ctags 
 Plug 'https://github.com/vim-scripts/TaskList.vim'
 " sudo apt-get install cscope, make cscope ARCH=arm in linux code src to build
 " database, or cscope -b in the root dir
 Plug 'https://github.com/vim-scripts/cscope.vim'
+Plug 'adah1972/cscope_maps.vim'
 Plug 'https://github.com/vim-scripts/ctags.vim--Johnson'
 Plug 'https://github.com/SirVer/ultisnips'
 Plug 'https://github.com/mattn/emmet-vim'
@@ -80,9 +82,10 @@ Plug 'mechatroner/rainbow_csv'
 
 call plug#end()
 
-
 " env setting
 " fzf,ripgrep
+" sudo apt install ripgrep
+" sudo apt install bat
 " export FZF_DEFAULT_COMMAND='rg --files --sortr modified'
 
 
@@ -162,7 +165,20 @@ set cursorline
 set tabstop=4 " set tab's width to 4
 set expandtab " replace tab with space
 set shiftwidth=4 " set indentation to 4
-au FileType c,cpp,objc  setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=4 cinoptions=:0,g0,(0,w1
+" Kernel programming, cinoptions to set no switch indention 
+au FileType c  setlocal shiftwidth=8 softtabstop=8 tabstop=8 cinoptions=:0,g0,(0,w1
+" 设定指定文件缩进方式
+" function! GnuIndent()
+"   setlocal cinoptions=>4,n-2,{2,^-2,:2,=2,g0,h2,p5,t0,+2,(0,u0,w1,m1
+"   setlocal shiftwidth=2
+"   setlocal tabstop=8
+" endfunction
+"
+" au BufRead /usr/include/*  call GnuIndent()
+
+" Common Programming
+" au FileType c,cpp,objc  setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=4 cinoptions=:0,g0,(0,w1
+au FileType cpp,objc  setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=4 cinoptions=:0,g0,(0,w1
 au FileType json        setlocal expandtab shiftwidth=2 softtabstop=2
 " vim script
 au FileType vim         setlocal expandtab shiftwidth=2 softtabstop=2
@@ -180,9 +196,9 @@ set spelllang+=cjk
 " Support mouse right click menu.
 set mousemodel=popup_setpos
 
-
 " Pust Cscope cmd results in quickfix
 set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key remapping
 " nnorempa - normal mode, inoremap - insert mode
@@ -197,7 +213,7 @@ inoremap <C-S-Tab> <C-O><C-W>W
 nnoremap <silent> <F2>      :nohlsearch<CR>
 inoremap <silent> <F2> <C-O>:nohlsearch<CR>
 
-" YCM
+" YouCompleteMe
 nnoremap <Leader>fi :YcmCompleter FixIt<CR>
 nnoremap <Leader>gt :YcmCompleter GoTo<CR>
 nnoremap <Leader>gd :YcmCompleter GoToDefinition<CR>
@@ -237,6 +253,10 @@ if !has('gui_running')
 endif
 
 " asyncrun make
+" 和 asyncrun 一起用的异步 make 命令
+command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
+" 异步运行命令时打开 quickfix 窗口，高度为 10 行
+let g:asyncrun_open = 10
 nnoremap <F5>  :if g:asyncrun_status != 'running'<bar>
                  \if &modifiable<bar>
                    \update<bar>
@@ -256,6 +276,8 @@ source $VIMRUNTIME/ftplugin/man.vim
 set keywordprg=:Man
 
 
+" Supports C++ error format
+set errorformat=\ %#%f(%l\\\,%c):\ %m
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " colorscheme molokai
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -293,7 +315,8 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 " Good for n<C-^> to swith buffer
 let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#tabline#overflow_marker = '?'
+let g:airline#extensions#tabline#overflow_marker = '...'
+" let g:airline#extensions#tabline#overflow_marker = '?'
 let g:airline#extensions#tabline#show_tab_nr = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -307,8 +330,9 @@ set encoding=utf-8
 source $VIMRUNTIME/vimrc_example.vim
 
 " Include system tags(system head file) and tags of parent directory
-" set tags=./tags,../tags,../../tags,tags,/usr/local/etc/systags
+" set tags=./tags,../tags,../../tags,../../../tags,stags,/usr/local/etc/systags
 set tags=./tags;,tags,/usr/local/etc/systags
+" set tags=./.tags;,.tags,/usr/local/etc/systags
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Configuration for markdown-preview.nvim
