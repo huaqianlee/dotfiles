@@ -11,6 +11,23 @@ ZSH_CUSTOM=$USER_DIR/.oh-my-zsh
 #####################################################################
 # clipboard
 # apt -y install xsel
+# For root privileges.
+if [ "$(whoami)" != "root" ] # [ "$(UID)" != 0 ]
+then
+printf  "%s" "$USER_PASSWD" | sudo -s <<EOF
+	apt -y install zsh
+	apt -y install tmux
+	apt -y install fzf
+	apt -y install vim-youcompleteme
+	apt -y install fonts-powerline
+    apt -y install ripgrep
+    apt -y install bat
+    apt -y install exuberant-ctags 
+    apt -y install cscope
+    apt -y install stow
+EOF
+fi
+# snap install universal-ctags
 
 # Install python package for terminator themes
 # pip install requests
@@ -27,22 +44,6 @@ rm -rf $USER_DIR/.oh-my-zsh
 # rm -rf $USER_DIR/.dir_colors
 # rm -rf $USER_DIR/.solarized
 
-# For root privileges.
-if [ "$(whoami)" != "root" ] # [ "$(UID)" != 0 ]
-then
-printf  "%s" "$USER_PASSWD" | sudo -s <<EOF
-	apt -y install zsh
-	apt -y install tmux
-	apt -y install fzf
-	apt -y install vim-youcompleteme
-	apt -y install fonts-powerline
-    apt -y install ripgrep
-    apt -y install bat
-    apt -y install exuberant-ctags 
-    apt -y install cscope
-EOF
-fi
-# snap install universal-ctags
 
 # zsh
 echo "Installing zsh ..."
@@ -51,6 +52,7 @@ stow zsh -t $STOW_DIR
 echo "Installing vim ..."
 stow vim -t $STOW_DIR
 vam install youcompleteme
+mkdir ~/vimtemp
 
 # git
 echo "Installing git ..."
