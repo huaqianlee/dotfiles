@@ -24,13 +24,15 @@ Plug 'https://github.com/mattn/emmet-vim'
 " Plug 'https://github.com/vim-syntastic/syntastic'
 Plug 'dense-analysis/ale'
 
-Plug 'https://github.com/preservim/nerdcommenter'
+Plug 'huaqianlee/DoxygenToolkit.vim'
+
+"Plug 'https://github.com/preservim/nerdcommenter'
 Plug 'https://github.com/sjl/gundo.vim'
 Plug 'https://github.com/python-mode/python-mode'
 Plug 'https://github.com/easymotion/vim-easymotion'
 Plug 'https://github.com/vim-scripts/SrcExpl'
 " On-demand loading
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+"Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'https://github.com/skywind3000/asyncrun.vim'
@@ -46,7 +48,7 @@ Plug 'BurntSushi/ripgrep'
 Plug 'sharkdp/bat'
 " YCM
 " Required vim 8.1+, or 'sudo apt install vim-youcompleteme'
-Plug 'ycm-core/YouCompleteMe', { 'do': './install.py' }
+Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --tern-completer' }
 Plug 'adah1972/ycmconf'
 " Git
 Plug 'airblade/vim-gitgutter'
@@ -102,16 +104,18 @@ if v:version >= 800
 endif
 
 set autowrite " autosave when switching file
+
 " store backup, undo, and swap files in temp directory
 " The double slash at the end ensures that there is no conflict in case of two
 " files having the same name, see comments (at the time of this edit this
 " option is only honored for swap files, not yet for backup files). The ,.
 " allow vim to use the current directory if the former doesn't exist.
+set nobackup
+set noswapfile
+" set undofile
 set directory=$HOME/vimtemp//
 set backupdir=$HOME/vimtemp//
 " set undodir=$HOME/vimtemp//,.
-set nobackup
-set noswapfile
 set undodir=~/.vim/undodir//
 if !isdirectory(&undodir)
 	call mkdir(&undodir,'p',0700)
@@ -125,6 +129,8 @@ if has('mouse')
 		set mouse=nvi
 	endif
 endif
+" Support mouse right click menu.
+set mousemodel=popup_setpos
 
 " Default font size
 if has('gui_running')
@@ -157,6 +163,7 @@ if !has('patch-8.0.210')
   endfunction
 endif
 
+" The screen scrolls once the cursor move into the $scrolloff line on top or bottom
 set scrolloff=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -199,8 +206,6 @@ au FileType changelog  setlocal textwidth=76
 
 setlocal spell spelllang=en_us
 set spelllang+=cjk
-" Support mouse right click menu.
-set mousemodel=popup_setpos
 
 " Pust Cscope cmd results in quickfix
 set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
@@ -328,9 +333,13 @@ let g:airline#extensions#tabline#show_tab_nr = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Supports chinese
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936,latin1
+set fileencodings=ucs-bom,utf-8,gb18030,gbk,gb2312,cp936,latin1
 set termencoding=utf-8
 set encoding=utf-8
+
+" Not compatible with VI, usually it is the default set, only need it 
+" on older vim
+set nocompatible
 
 " Import Syntax and search highlight, command history, last space ...
 source $VIMRUNTIME/vimrc_example.vim
@@ -521,7 +530,8 @@ let g:ycm_filetype_whitelist = {
       \ }
 let g:ycm_goto_buffer_command = 'split-or-existing-window'
 let g:ycm_key_invoke_completion = '<C-Z>'
-
+" Use homebrew's clangd
+let g:ycm_clangd_binary_path = trim(system('brew --prefix llvm')).'/bin/clangd'
 " let g:ycm_global_ycm_extra_conf = '/usr/lib/ycmd/ycm_extra_conf.py'
 
 " Close quickfix if it is the last window

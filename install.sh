@@ -1,8 +1,10 @@
 #!/bin/sh
 # Powered by AndyLee
 
-USER_DIR=/home/lee
+# USER_DIR=/home/lee
+USER_DIR=$HOME
 USER_PASSWD="a\n"
+STOW_DIR=$USER_DIR
 STOW_DIR=$USER_DIR
 ZSH_CUSTOM=$USER_DIR/.oh-my-zsh
 
@@ -14,18 +16,20 @@ ZSH_CUSTOM=$USER_DIR/.oh-my-zsh
 # For root privileges.
 if [ "$(whoami)" != "root" ] # [ "$(UID)" != 0 ]
 then
-printf  "%s" "$USER_PASSWD" | sudo -s <<EOF
-	apt -y install zsh
-	apt -y install tmux
-	apt -y install fzf
-	apt -y install vim-youcompleteme
-	apt -y install fonts-powerline
+    printf  "%s" "$USER_PASSWD" | sudo -s <<EOF
+    apt -y install zsh
+    apt -y install tmux
+    apt -y install fzf
+    apt -y install vim-youcompleteme
+    apt -y install fonts-powerline
     apt -y install ripgrep
     apt -y install bat
+    # Universal Ctags is better, but need to intall it by compiling the
+    # source code, especially for C++ new feature.
     apt -y install exuberant-ctags 
     apt -y install cscope
     apt -y install stow
-EOF
+    EOF
 fi
 # snap install universal-ctags
 
@@ -82,5 +86,5 @@ cp -rf submodules/zsh-autosuggestions $ZSH_CUSTOM/plugins/
 # echo "Installing solarized ..."
 # eval `printf "1\n1\nYES\n\n" | $USER_DIR/.solarized/install.sh`
 
-eval `printf  "%s" "$USER_PASSWD" | chsh -s $(which zsh)`
+eval $(printf  "%s" "$USER_PASSWD" | chsh -s $(which zsh))
 exec zsh -l
