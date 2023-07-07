@@ -179,8 +179,9 @@ set tabstop=4 " set tab's width to 4
 set expandtab " replace tab with space
 set shiftwidth=4 " set indentation to 4
 " Kernel programming, cinoptions to set no switch indention 
+" au BufRead /path/to/kernel/* setlocal expandtab shiftwidth=8 softtabstop=8 tabstop=8 cinoptions=:0,g0,(0,w1
 " au FileType c  setlocal shiftwidth=8 softtabstop=8 tabstop=8 cinoptions=:0,g0,(0,w1
-" 设定指定文件缩进方式
+"" 设定指定文件缩进方式
 " function! GnuIndent()
 "   setlocal cinoptions=>4,n-2,{2,^-2,:2,=2,g0,h2,p5,t0,+2,(0,u0,w1,m1
 "   setlocal shiftwidth=2
@@ -206,6 +207,7 @@ au FileType changelog  setlocal textwidth=76
 
 setlocal spell spelllang=en_us
 set spelllang+=cjk
+" set spell
 
 " Pust Cscope cmd results in quickfix
 set cscopequickfix=s-,c-,d-,i-,t-,e-,a-

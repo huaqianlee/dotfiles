@@ -29,7 +29,7 @@ then
     apt -y install exuberant-ctags 
     apt -y install cscope
     apt -y install stow
-    EOF
+EOF
 fi
 # snap install universal-ctags
 
