@@ -2,9 +2,17 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/lee/.oh-my-zsh"
-export SYNTAX_ZSH="/home/lee/.zsh-syntax-highlighting"
-#export FZF_BASE="/home/lee/bin/fzf"
+export ZSH="${ZDOTDIR:-$HOME}/.oh-my-zsh"
+export SYNTAX_ZSH="$HOME/.zsh-syntax-highlighting"
+
+# History configuration
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=100000
+SAVEHIST=100000
+setopt share_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups
+setopt hist_verify
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -83,24 +91,11 @@ source $ZSH/oh-my-zsh.sh
 source $SYNTAX_ZSH/zsh-syntax-highlighting.zsh
 # Remove username and hostname from terminal
 prompt_context() {}
-# Only display username
-# prompt_context() {
-#   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-#     prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
-#   fi
-# }
+
 # Only display current directory
 prompt_dir() {
     prompt_segment blue black '%c'
 }
-# change prompt
-# prompt_context() {
-#   prompt_segment $PRIMARY_FG default  "  🌈  "
-# }
-# 
-# prompt_dir() {
-#   prompt_segment blue $PRIMARY_FG ' %c '
-# }
 
 # Prevent duplicates in history
 setopt hist_ignore_all_dups hist_save_nodups
@@ -110,8 +105,8 @@ setopt hist_ignore_all_dups hist_save_nodups
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+# Language environment
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -139,22 +134,35 @@ alias l='ls -CFh'
 alias lg='ll -a | grep '
 alias hg='history | grep '
 alias hv='history | vim -'
-alias copy='xsel -ib'
-alias paste='xsel --clipboard'
-alias vimclipboard='paste | vim -'
 alias mv="mv -v"
 alias rm="rm -vi"
 alias cp="cp -v"
-alias install="sudo apt install "
-alias update="sudo apt update"
-# cat file | pbcopy , or pbcopy < file
-alias pbcopy='xsel --clipboard --input'
-alias pbpaste='xsel --clipboard --output'
-alias myip="ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
+alias myip="ipconfig getifaddr en0 2>/dev/null || ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
+
+# Platform-specific aliases
+if [[ "$(uname)" == "Darwin" ]]; then
+  export CLICOLOR=1
+  alias ls='ls -G'
+  alias copy='pbcopy'
+  alias paste='pbpaste'
+  alias vimclipboard='pbpaste | vim -'
+else
+  alias copy='xsel -ib'
+  alias paste='xsel --clipboard'
+  alias vimclipboard='paste | vim -'
+  alias pbcopy='xsel --clipboard --input'
+  alias pbpaste='xsel --clipboard --output'
+  alias install="sudo apt install "
+  alias update="sudo apt update"
+fi
 
 # Configure Ctrl+U to backward-kill-line not kill-whole-line
 bindkey \^U backward-kill-line
 bindkey \^G kill-whole-line
+
+# History substring search keybindings
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 # eval `dircolors ~/.dir_colors/dircolors`
 
