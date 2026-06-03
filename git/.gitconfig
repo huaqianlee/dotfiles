@@ -1,31 +1,85 @@
 [user]
 	name = huaqianlee
-	email = huaqian@gmail.com
+	email = huaqianlee@gmail.com
 
 [color]
 	ui = auto
 
-# store pwd
-[credential]
-        helper = store
+[init]
+	defaultBranch = main
 
-# template of commit message
-#[commit]
-#      template = ~/.git_complate
+[push]
+	autoSetupRemote = true
+	default = current
 
-[alias]
-	st = status
-	lo = log --oneline
-	lg = log --oneline --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(    %cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	cp = cherry-pick
-	co = checkout
-	cm = commit
-	br = branch
-	df = diff
-	sneak = commit -a --amend --no-edit
-	undo = reset --soft HEAD^
-	conl = config --local --list
+[pull]
+	rebase = true
+
+[merge]
+	conflictStyle = zdiff3
+
+[rerere]
+	enabled = true
+
+# credential helper — platform specific
+# macOS: git config --global credential.helper osxkeychain
+# Linux: git config --global credential.helper store
 
 [core]
-	editor = vim	
+	editor = vim
 
+[alias]
+	# status
+	st = status
+	ss = status -s
+
+	# log
+	lo = log --oneline
+	lg = log --oneline --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	l = log --oneline --graph
+	last = log -1 HEAD
+	tree = log --oneline --graph --all
+
+	# diff
+	df = diff
+	dc = diff --cached
+	dt = difftool
+
+	# commit
+	cm = commit
+	ca = commit --amend
+	sneak = commit -a --amend --no-edit
+
+	# branch
+	br = branch
+	bv = branch -vv
+
+	# checkout
+	co = checkout
+	cob = checkout -b
+
+	# cherry-pick
+	cp = cherry-pick
+
+	# reset / undo
+	undo = reset --soft HEAD^
+	unstage = reset HEAD --
+
+	# rebase
+	rb = rebase
+	rbi = rebase -i
+
+	# fetch / push / pull
+	f = fetch
+	p = push
+	pl = pull --rebase
+
+	# stash
+	pop = stash pop
+	sa = stash save
+	sl = stash list
+
+	# misc
+	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.//g'
+	contributors = shortlog -s --
+	ignore = !git ls-files -i --exclude-standard
