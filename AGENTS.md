@@ -25,6 +25,7 @@ After install, Oh My Zsh is bootstrapped from `submodules/.oh-my-zsh/tools/insta
 | `bash/` | `~/.bashrc` | fallback bash config with NVM, FZF via ripgrep |
 | `terminator/` | `~/.config/terminator/config` | Solarized themes, TerminatorThemes plugin |
 | `config/mpv/` | `~/.config/mpv/` | mpv with GPU-hq profile, ICC color, interpolation, auto-safe HW decode, OSC off |
+| `config/iterm2/` | (reference, not stow'd) | Dracula iTerm2 color scheme — import via Settings → Profiles → Colors → Color Presets |
 
 Note: `bash/` and `terminator/` packages are **present but commented out** in both install scripts. To link them manually: `stow bash -t $HOME` / `stow terminator -t $HOME`.
 
