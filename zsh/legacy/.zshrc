@@ -186,3 +186,6 @@ VISUAL=vim; export VISUAL EDITOR=vim; export EDITOR
 
 # Export
 export FZF_DEFAULT_COMMAND='rg --files --sortr modified'
+
+# Local secrets (not tracked by git, preserved across theme switches)
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

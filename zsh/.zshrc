@@ -104,3 +104,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export FZF_DEFAULT_COMMAND='rg --files --sortr modified'
 
 . "$HOME/.local/bin/env"
+
+# Local secrets (not tracked by git, preserved across theme switches)
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

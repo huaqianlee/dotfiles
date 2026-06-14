@@ -3,4 +3,6 @@
 plugged
 vim/.vim/undodir
 .omo
+# Local secrets — never committed
+~/.zshrc.local
 
