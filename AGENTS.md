@@ -20,7 +20,7 @@ After install, Oh My Zsh is bootstrapped from `submodules/.oh-my-zsh/tools/insta
 |---|---|---|
 | `zsh/` | `~/.zshrc` | zsh config + Oh My Zsh (agnoster theme), zsh-syntax-highlighting, zsh-autosuggestions |
 | `vim/` | `~/.vimrc` | vim-plug with 40+ plugins, YCM, markdown-preview, python-mode, airline |
-| `git/` | `~/.gitconfig` | git aliases (st, lo, lg, cp, co, cm, br, df, sneak, undo), credential store, editor=vim |
+| `git/` | `~/.gitconfig` | git aliases, credential store, editor=vim, main branch default |
 | `tmux/` | `~/.tmux.conf` | vi mode keys, Alt+arrow pane switch, mouse on, 256-color/tmux-256color, 50k history |
 | `bash/` | `~/.bashrc` | fallback bash config with NVM, FZF via ripgrep |
 | `terminator/` | `~/.config/terminator/config` | Solarized themes, TerminatorThemes plugin |
@@ -40,7 +40,8 @@ Clone with: `git clone --recursive`. Update all: `git submodule update --init --
 
 ## Platform quirks
 
-- `.zshrc` hardcodes `ZSH="/home/lee/.oh-my-zsh"` and `SYNTAX_ZSH="/home/lee/.zsh-syntax-highlighting"` — Linux paths. On macOS or other platforms these paths must be adjusted (stow links them to `~/.oh-my-zsh` and `~/.zsh-syntax-highlighting`).
+- `.zshrc` uses `${ZDOTDIR:-$HOME}` for Oh My Zsh but hardcodes `SYNTAX_ZSH="$HOME/.zsh-syntax-highlighting"` — stow links these to the correct locations, but if using without stow, paths must match.
+- `.zshrc` defines platform-specific aliases: macOS gets `copy`/`paste` via pbcopy/pbpaste; Linux gets `xsel`-based equivalents, `install`/`update` apt shortcuts.
 - `install.sh` hardcodes `apt` package manager. `mac_install.sh` is the brew counterpart.
 - Vim `.vimrc` line 536: `let g:ycm_clangd_binary_path = trim(system('brew --prefix llvm')).'/bin/clangd'` — macOS-specific for YouCompleteMe clangd path.
 
@@ -49,12 +50,12 @@ Clone with: `git clone --recursive`. Update all: `git submodule update --init --
 - **zsh**: agnoster theme, `prompt_context()` overridden to hide user@host (empty), `prompt_dir()` shows only `%c` (current dir). `Ctrl+U` = backward-kill-line, `Ctrl+G` = kill-whole-line. `FZF_DEFAULT_COMMAND='rg --files --sortr modified'`.
 - **vim**: Leader key `\`. `F2` stops highlight. `Ctrl+Tab`/`Ctrl+Shift+Tab` cycle windows. `F11/F12` quickfix navigation. `F9` wildmenu for recent files. `F5` async make via asyncrun. `Tab` runs clang-format. YCM mappings: `\fi` fixit, `\gt` goto, `\gd` goto def, `\gh` goto decl, `\gr` goto refs. `\v` paste-over-selection from `"0` register. Colorscheme: molokai. `.swp`/`.swo`/undodir in gitignore.
 - **tmux**: `Alt+arrow` switches panes without prefix. `Prefix+r` reloads config. Splits/new windows inherit current pane path (`-c "#{pane_current_path}"`).
-- **git**: Aliases: `st`=status, `lo`=log --oneline, `lg`=pretty log graph, `sneak`=amend-no-edit, `undo`=reset --soft HEAD^.
+- **git**: `defaultBranch = main`, `pull.rebase = true`, `merge.conflictStyle = zdiff3`, `push.autoSetupRemote = true`. Aliases: `st`=status, `lo`=log --oneline, `lg`=pretty log graph, `sneak`=amend-no-edit, `undo`=reset --soft HEAD^.
 - **mpv**: GPU-hq profile, ICC auto, interpolation/oversample, HW decode auto-safe, save-position-on-quit, OSC off.
 
 ## Before editing
 
-- Run `lsp_diagnostics` after editing `.vimrc`, `.zshrc`, `.tmux.conf`? No LSP available for these — manual validation with `vim -c 'syn on'` or `zsh -n` syntax check.
+- No LSP available for `.vimrc`, `.zshrc`, `.tmux.conf` — manual validation only.
 - Validate `.vimrc`: `vim -c 'qa!'` — exits with 0 if no errors at startup.
 - Validate `.zshrc`: `zsh -n ~/.zshrc` — syntax check.
 - Validate `.tmux.conf`: `tmux source-file ~/.tmux.conf` — syntax check.
